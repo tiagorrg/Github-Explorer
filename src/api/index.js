@@ -1,7 +1,9 @@
+const GITHUB_API_URL = import.meta.env.VITE_GITHUB_API_URL
+
 export const fetchGit = {
     async fetchRepos(username) {
         try {
-            const response = await fetch(`https://api.github.com/users/${username}/repos`);
+            const response = await fetch(`${GITHUB_API_URL}/users/${username}/repos`);
             
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
@@ -16,7 +18,7 @@ export const fetchGit = {
 
     async fetchRepoReadme(owner, repo) {
         try {
-            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`);
+            const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/readme`);
 
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
@@ -33,7 +35,7 @@ export const fetchGit = {
 
     async fetchRepoLanguage(owner, repo) {
         try {
-            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/languages`);
+            const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/languages`);
 
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
