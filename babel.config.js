@@ -5,11 +5,10 @@ export default {
             targets: {
                 node: 'current'
             },
-            modules: 'commonjs' // Важно для Jest
+            modules: 'commonjs'
         }]
     ],
     plugins: [
-        // Добавляем плагин для обработки import.meta
         function () {
             return {
                 visitor: {
