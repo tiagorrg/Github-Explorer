@@ -1,7 +1,8 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { getFromLocalStorage } from '../../utils';
 import { KEY_HISTORY } from '../../constants';
 import { useEffect, useState } from 'react';
+import * as SC from './styles'
 
 export default function Layout() {
     const [history, setHistory] = useState([])
@@ -13,23 +14,24 @@ export default function Layout() {
     }, [location])
 
     return (
-        <div>
-            <header>
-                <Link to="/">Главная</Link>
-            </header>
-            <aside>
+        <SC.Container>
+            <SC.Header>
+                <SC.HomeLink to="/">Главная</SC.HomeLink>
+            </SC.Header>
+            <SC.Sidebar>
+                <SC.HistoryTitle>История посещений</SC.HistoryTitle>
                 {history.map(repo => (
-                    <Link
+                    <SC.HistoryLink
                         to={`/${repo.owner}/${repo.repo}`} 
                         key={`${repo.owner}-${repo.repo}`}
                     >
                         {repo.owner}/{repo.repo}
-                    </Link>
+                    </SC.HistoryLink>
                 ))}
-            </aside>
-            <main>
+            </SC.Sidebar>
+            <SC.MainContent>
                 <Outlet />
-            </main>
-        </div>
+            </SC.MainContent>
+        </SC.Container>
     );
 }
