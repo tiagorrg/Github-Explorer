@@ -4,7 +4,7 @@ export const fetchGit = {
     async fetchRepos(username) {
         try {
             const response = await fetch(`${GITHUB_API_URL}/users/${username}/repos`);
-            
+
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
             }
@@ -20,16 +20,23 @@ export const fetchGit = {
         try {
             const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/readme`);
 
+            if (response.status === 404) {
+                return null
+            }
+
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
             }
-            
+
             const data = await response.json()
 
             return atob(data.content);
         } catch (error) {
-            console.error(`Ошибка при запросе ReadMe ${owner}:`, error);
-            throw error;
+            if (error.message.includes('404')) {
+                return null;
+            }
+            console.error(`Ошибка при запросе ReadMe ${owner}/${repo}:`, error);
+            throw error
         }
     },
 
@@ -40,7 +47,7 @@ export const fetchGit = {
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
             }
-            
+
             const data = await response.json()
 
             return Object.keys(data);

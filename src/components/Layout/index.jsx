@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { getFromLocalStorage } from '../../utils';
 import { KEY_HISTORY } from '../../constants';
 import { useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ export default function Layout() {
                 <SC.HomeLink to="/">Главная</SC.HomeLink>
             </SC.Header>
             <SC.Sidebar>
+                <SC.HistoryTitle>История посещений</SC.HistoryTitle>
                 {history.map(repo => (
                     <SC.HistoryLink
                         to={`/${repo.owner}/${repo.repo}`} 

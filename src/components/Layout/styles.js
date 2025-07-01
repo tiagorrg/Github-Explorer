@@ -1,4 +1,3 @@
-// styles.js
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -48,6 +47,10 @@ export const HistoryLink = styled(Link)`
     text-decoration: underline;
   }
 `;
+
+export const HistoryTitle = styled.h1`
+  order: 1;
+`
 
 export const MainContent = styled.main`
   padding-left: 20px;

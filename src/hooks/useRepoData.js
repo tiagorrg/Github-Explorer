@@ -11,9 +11,16 @@ export const useRepoData = (owner, repo) => {
 
         try {
             const content = await fetchGit.fetchRepoReadme(owner, repo);
-            setReadme(content);
+
+            if (!content) {
+                setReadme('ReadMe не найден')
+            }
+
+            if (content) {
+                setReadme(content)
+            }
         } catch {
-            setReadme('ReadMe не задан');
+            setReadme('Ошибка при выполнении запроса ReadMe');
         }
 
         try {
